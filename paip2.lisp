@@ -27,6 +27,20 @@
 
 ;;Consider more Complex Rules Such as Adjectives
 
+(defun Adj* ()
+  (if (= (random 2) 0)
+      nil
+      (append (Adj) (Adj*))))
+
+(defun PP* ()
+  (if (random-elt '(t nil))
+      (append (PP) (PP*))
+      nil))
+
+(defun noun-phrase () (append (Article) (Adj*) (Noun) (PP*)))
+(defun PP () (append (Prep) (noun-phrase)))
+(defun Adj () (one-of '(big little blue green adiabatic)))
+(defun Prep () (one-of '(to in by with on)))
 
 
 
