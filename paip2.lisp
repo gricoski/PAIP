@@ -6,7 +6,7 @@
 
 ;;First make the function to build the sentences based on sentence rules
 (defun sentence () (append (noun-phrase) (verb-phrase)))
-(defun noun-phrase () (append (article) (noun)))
+;(defun noun-phrase () (append (article) (noun)))
 (defun verb-phrase () (append (verb) (noun-phrase)))
 (defun Article () (one-of '(the a)))
 (defun Noun () (one-of '(Michael ball dog Vienna)))
@@ -56,4 +56,62 @@
   "The grammar used by generate. Initially, this is
 *simple-grammar*, but we can switch to other grammars.")
 
+;;assoc returns the first element of the list of lists that start with a key (ex. noun)
+(assoc 'noun *grammar*)
 
+;;Grammar rules are implemented as lists, but better to use functions to operation on parameter
+(defun rule-lhs (rule)
+  "The left h and side of a rule."
+  (first rule))
+
+(defun rule-rhs (rule)
+  "The right hand side of a rule"
+  (rest (rest rule)))
+
+(defun rewrites (category)
+  "Return a list of the possible rewrites for this category."
+  (rule-rhs (assoc category *grammar*)))
+
+(defun generate (phrase)
+  "Generate a random sentence or phrase"
+  (cond ((listp phrase)
+         (mappend #'generate phrase))
+        ((rewrites phrase)
+         (generate (random-elt (rewrites phrase))))
+        (t (list phrase))))
+
+;;Creating mappend from section 1 as it used above
+(defun mappend (fn the-list)
+  "apply fn to each element of list and
+append the results"
+  (if (null the-list)
+      nil
+      (append (funcall fn (first the-list))
+              (mappend fn (rest the-list)))))
+
+;;Run the program with
+(generate 'sentence)
+(generate 'sentence)
+(generate 'noun-phrase)
+(generate 'verb-phrase)
+
+;;Another version of generate made with if instead of cond
+(defun generate2 (phrase)
+  "Generate a random sentence or phrase"
+  (if (listp phrase)
+      (mappend #'generate2 phrase)
+      (let ((choices (rewrites phrase)))
+        (if (null choices)
+            (list phrase)
+            (generate2 (random-elt choices))))))
+
+;;tip use let instead of setf as it keeps your mess it clean
+
+;;Exercise 2.1
+
+;;Generate remade with cond but without using rewrites
+(defun generate3 (phrase)
+  "Generate random sentences without useing rewrites function"
+  (cond ((listp phrase)
+         (mappend #'generate3 phrase))
+        ((lambda (phrase) #'))));Maybe use let and category?
