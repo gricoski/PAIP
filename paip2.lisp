@@ -43,4 +43,17 @@
 (defun Prep () (one-of '(to in by with on)))
 
 ;;Creating the program in a different way
+(defparameter *simple-grammar*
+  '((sentence -> (noun-phrase verb-phrase))
+    (noun-phrase -> (article Noun))
+    (verb-phrase -> (verb noun-phrase))
+    (article -> the a)
+    (Noun -> man ball woman table)
+    (verb -> hit took saw liked))
+  "A grammar for a trivial subset of English.")
+
+(defvar *grammar* *simple-grammar*
+  "The grammar used by generate. Initially, this is
+*simple-grammar*, but we can switch to other grammars.")
+
 
