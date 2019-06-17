@@ -42,5 +42,5 @@
 (defun Adj () (one-of '(big little blue green adiabatic)))
 (defun Prep () (one-of '(to in by with on)))
 
-
+;;Creating the program in a different way
 
