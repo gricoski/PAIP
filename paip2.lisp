@@ -110,8 +110,80 @@ append the results"
 ;;Exercise 2.1
 
 ;;Generate remade with cond but without using rewrites
+;;Thier Answer
 (defun generate3 (phrase)
   "Generate random sentences without useing rewrites function"
   (cond ((listp phrase)
          (mappend #'generate3 phrase))
-        ((lambda (phrase) #'))));Maybe use let and category?
+        ((setf choices (rewrites phrase))
+         (generate (random-elt choices)))
+        (t (list phrase))))
+
+;;Section 2.5
+
+;;Approach 2 of using the most natural notation to solve the problem
+(defparameter *bigger-grammar*
+  '((sentence -> (noun-phrase verb-phrase))
+    (noun-phrase -> (article adj* Noun PP*) (Name) (Pronoun))
+    (verb-phrase -> (verb noun-phrase PP*))
+    (PP* -> () (PP PP*))
+    (Adj* -> () (Adj Adj*))
+    (PP -> (Prep noun-phrase))
+    (Prep -> to in by with on)
+    (Adj -> big little blue green adiabatic)
+    (article -> the a)
+    (name -> pat kim lee terry robin)
+    (noun -> man ball woman table)
+    (verb -> hit took saw liked)
+    (pronoun -> he she it these those that)))
+
+;;Update grammar variable to refer to t his new grammar list
+(setf *grammar* *bigger-grammar*)
+
+;;Section 2.6
+
+;;ONE DATE MULTIPLE PROGRAM APPROACH (APPROACH #2) (Apprach #1 is direct lisp code)
+
+;;Advantage of representing info in a declarative form as rules
+;;We make one function to reuse the words in a new way
+
+;;Generate random sentence structure
+(defun generate-tree (phrase)
+  "Generate a random sentence or phrase, with
+a complete parse tree."
+  (cond ((listp phrase)
+         (mapcar #'generate-tree phrase))
+        ((rewrites phrase)
+         (cons phrase
+               (generate-tree (random-elt (rewrites phrase)))))
+        (t (list phrase))))
+
+;;Generate all posibilites of phrase
+(defun generate-all (phrase)
+  "Generate a list of all possible expansions of this phrase."
+  (cond ((null phrase) (list nil))
+        ((listp phrase)
+         (combine-all (generate-all (first phrase))
+                      (generate-all (rest phrase))))
+        ((rewrites phrase)
+         (mappend #'generate-all (rewrites phrase)))
+        (t (list (list phrase)))))
+
+(defun combine-all (xlist ylist)
+  "Return a list of lists formed by appending a y to an x.
+e.g., (combine-all '((a) (b)) '((1) (2)))
+-> ((A 1) (B 1) (A 2) (B 2))."
+  (mappend #' (lambda (y)
+                (mapcar #'(lambda (x) (append x y)) xlist)) ylist))
+
+;;Note
+;;Generate-all does not do recursive grammar as 'Adj* -> Adj + Adj* would lead to infinite possibilites
+
+;;Therefore we have to use the old grammar
+
+(setf *grammar* *simple-grammar*)
+
+(length (generate-all 'sentence)) ;->256
+
+;;Redo Exercises - Learn rewrites function
+
