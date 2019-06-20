@@ -187,3 +187,31 @@ e.g., (combine-all '((a) (b)) '((1) (2)))
 
 ;;Redo Exercises - Learn rewrites function
 
+;;Exercise
+;;A version of generate that avoids using rewrite twice
+
+(defun generate4 (phrase)
+  (cond ((listp phrase)
+         ())))
+
+;;Relearning basics of Chapter
+(defun mapend (fn list)
+  (cond ((endp list) nil)
+        (t (append (apply fn (car list))
+                   (apply fn (rest list))))))
+;;This one doesn't work, buecase apply needs a list or something
+
+(defun mapend2 (fn list)
+  (cond ((endp list) nil)
+        (t (append (funcall fn (car list))
+                   (funcall fn (cdr list))))))
+;;This one does not work like the real mappend in there is an extra ()
+
+(defun mapend3 (fn list)
+  (cond ((endp list) nil)
+        (t (append (funcall fn (car list))
+                   (mapend3 fn (cdr list))))))
+;This seems to work the same as mappend, but with a cond instead of an if
+
+
+;;
