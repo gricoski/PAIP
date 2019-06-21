@@ -2,6 +2,8 @@
 ;;Chapter 2
 ;;https://github.com/norvig/paip-lisp/blob/master/docs/chapter2.md
 
+;;to save git in cmd press esc then type :wq
+
 ;;Text Generator Program
 
 ;;First make the function to build the sentences based on sentence rules
@@ -73,7 +75,7 @@
   (rule-rhs (assoc category *grammar*)))
 
 (defun generate (phrase)
-  "Generate a random sentence or phrase"
+  "Generate a random sentence or phrased"
   (cond ((listp phrase)
          (mappend #'generate phrase))
         ((rewrites phrase)
@@ -191,8 +193,9 @@ e.g., (combine-all '((a) (b)) '((1) (2)))
 ;;A version of generate that avoids using rewrite twice
 
 (defun generate4 (phrase)
-  (cond ((listp phrase)
-         ())))
+  (cond ((listp phrase);Starting the conditional function
+         (mapend3 '#generate4 phrase));This line allows the function to run on all elements of phrase if there are more than one.  
+        (())))
 
 ;;Relearning basics of Chapter
 (defun mapend (fn list)
@@ -214,4 +217,17 @@ e.g., (combine-all '((a) (b)) '((1) (2)))
 ;This seems to work the same as mappend, but with a cond instead of an if
 
 
-;;
+;;Testing Assoc
+(defparameter *Operators-Year1*
+  '((SAS Thacter Sledge Mute Smoke)
+    (GSG9 Bandit IQ Blitz Yeager)
+    (FBI Thermite Ash Castle Pules)
+    (GIGN Montange Doc Rook Twitch)))
+
+(defvar *Operator* *Operators-Year1*)
+
+(defun rewrites2 (agency)
+  "Picks the operator"
+  (rest (assoc agency *operator* )))
+
+
