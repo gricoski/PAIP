@@ -219,10 +219,12 @@ e.g., (combine-all '((a) (b)) '((1) (2)))
 
 ;;Testing Assoc
 (defparameter *Operators-Year1*
-  '((SAS Thacter Sledge Mute Smoke)
+  '(
+    (SAS Thacter Sledge Mute Smoke)
     (GSG9 Bandit IQ Blitz Yeager)
     (FBI Thermite Ash Castle Pules)
-    (GIGN Montange Doc Rook Twitch)))
+    (GIGN Montange Doc Rook Twitch)
+    (SPETSNAZ Glaz Fuze Kapkan Tachanka)))
 
 (defvar *Operator* *Operators-Year1*)
 
@@ -230,4 +232,6 @@ e.g., (combine-all '((a) (b)) '((1) (2)))
   "Picks the operator"
   (rest (assoc agency *operator* )))
 
-
+(defun random-elt2 (choice)
+  "randomly choices a choice by first finding a lsit then picks a number randomly ccorresponding to that list and then picks then uses that random number as an index to pick one of the elements out of the list"
+  (elt choice (random (length choice))))
