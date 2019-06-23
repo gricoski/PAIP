@@ -191,11 +191,13 @@ e.g., (combine-all '((a) (b)) '((1) (2)))
 
 ;;Exercise
 ;;A version of generate that avoids using rewrite twice
-
+;;EXERCISE 2.1
 (defun generate4 (phrase)
   (cond ((listp phrase);Starting the conditional function
-         (mapend3 '#generate4 phrase));This line allows the function to run on all elements of phrase if there are more than one.  
-        (())))
+         (mapend3 #'generate4 phrase));This line allows the function to run on all elements of phrase if there are more than one.  
+        ((rest (rest (assoc phrase *grammar*)))
+         (generate4 (random-elt (rest (rest (assoc phrase *grammar*))))))
+        (t (list phrase))))
 
 ;;Relearning basics of Chapter
 (defun mapend (fn list)
@@ -217,21 +219,36 @@ e.g., (combine-all '((a) (b)) '((1) (2)))
 ;This seems to work the same as mappend, but with a cond instead of an if
 
 
+;;Exercise 2.2
+;;Differentiate between terminal and nonterminal symbols with generate fun
+(defun generate5 (phrase)
+  "Just Trash at this point. "
+  (cond ((listp phrase)
+         (mapend3 #'generate5 phrase))
+        ((equal (rest (rest phrase)) nil)
+         (list phrase))
+        (t (generate5 (random-elt (rewrites phrase))))))
+
+
 ;;Testing Assoc
 (defparameter *Operators-Year1*
-  '(
-    (SAS Thacter Sledge Mute Smoke)
-    (GSG9 Bandit IQ Blitz Yeager)
+  '((SAS Thacter Sledge Mute Smoke)
+    (GSG9  IQ Blitz Yeager Bandit)
     (FBI Thermite Ash Castle Pules)
-    (GIGN Montange Doc Rook Twitch)
+    (GIGN Montange Twitch Doc Rook )
     (SPETSNAZ Glaz Fuze Kapkan Tachanka)))
 
 (defvar *Operator* *Operators-Year1*)
+;;once you define this variable it doesn't change when you change parameter
+(defvar *Operator2* *operators-year1*)
+;;I had to make a new varible to pull up the 
 
 (defun rewrites2 (agency)
-  "Picks the operator"
+  "Picks the operators based off the agency but doesnt return angency due to rest fn"
   (rest (assoc agency *operator* )))
 
 (defun random-elt2 (choice)
   "randomly choices a choice by first finding a lsit then picks a number randomly ccorresponding to that list and then picks then uses that random number as an index to pick one of the elements out of the list"
   (elt choice (random (length choice))))
+
+
