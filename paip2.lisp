@@ -225,9 +225,28 @@ e.g., (combine-all '((a) (b)) '((1) (2)))
   "Just Trash at this point. "
   (cond ((listp phrase)
          (mapend3 #'generate5 phrase))
-        ((equal (rest (rest phrase)) nil)
+        ((equal nil (rest phrase))
          (list phrase))
         (t (generate5 (random-elt (rewrites phrase))))))
+
+;;Second Try
+(defun generate6 (phrase)
+  "more trash but wiht If"
+  (cond ((listp phrase)
+         (mapend3 #'generate6 phrase))
+        (t (if (rewrites phrase)
+               (generate6 (random-elt (rewrites phrase)))
+               (list phrase)))))
+;;WORKED!!  Was it what they wanted lol?
+
+;;How Cond Works?
+(defun conder (x)
+  (cond ((endp x) nil)
+        ((length x)
+         (cons x (conder (rest x))))))
+
+;;Exercise 2.3
+
 
 
 ;;Testing Assoc
