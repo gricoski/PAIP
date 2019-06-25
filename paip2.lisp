@@ -251,7 +251,12 @@ e.g., (combine-all '((a) (b)) '((1) (2)))
 
 ;;Testing Assoc
 (defparameter *Operators-Year1*
-  '((SAS Thacter Sledge Mute Smoke)
+  '((Rainbow SAS FBI GSG9 GIGN SPETSNAZ)
+    (Team1 FBI SAS SAS GSG9 GIGN)
+    (Team2 FBI FBI SAS GSG9 GIGN)
+    (UKUSA SAS SAS FBI FBI GIGN)
+    (WEUR SPETSNAZ SPETSNAZ GSG9 GSG9 GIGN)
+    (SAS Thacter Sledge Mute Smoke)
     (GSG9  IQ Blitz Yeager Bandit)
     (FBI Thermite Ash Castle Pules)
     (GIGN Montange Twitch Doc Rook )
@@ -259,15 +264,33 @@ e.g., (combine-all '((a) (b)) '((1) (2)))
 
 (defvar *Operator* *Operators-Year1*)
 ;;once you define this variable it doesn't change when you change parameter
-(defvar *Operator2* *operators-year1*)
+(defvar *Operator4* *operators-year1*)
 ;;I had to make a new varible to pull up the 
 
 (defun rewrites2 (agency)
   "Picks the operators based off the agency but doesnt return angency due to rest fn"
-  (rest (assoc agency *operator* )))
+  (rest (assoc agency *operator4* )))
+
+(defun attackers (rush)
+  "Picks only attackers out of the list"
+  (list (first (rewrites2 rush)) (second (rewrites2 rush))))
+
+(defun defenders (camp)
+  "Picks only defenders out of list"
+  (list (third (rewrites2 camp)) (fourth (rewrites2 camp))))
 
 (defun random-elt2 (choice)
   "randomly choices a choice by first finding a lsit then picks a number randomly ccorresponding to that list and then picks then uses that random number as an index to pick one of the elements out of the list"
   (elt choice (random (length choice))))
+
+(defun R6TeamGen (Team Side)
+  "Generates an R6 Team based weather DF or OF"
+  (cond ((listp team)
+         (mapend3 #'r6teamgen ))
+        ((rewrites2 Team)
+         (if (equal side 'attackers)
+             (R6TeamGen (random-elt2 (rewrites2 team)) Side)
+             (R6TeamGen (random-elt2 (rewrites2 team)) Side)))
+        (t (list team))))
 
 
