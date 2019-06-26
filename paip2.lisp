@@ -4,6 +4,8 @@
 
 ;;to save git in cmd press esc then type :wq
 
+
+
 ;;Text Generator Program
 
 ;;First make the function to build the sentences based on sentence rules
@@ -251,22 +253,20 @@ e.g., (combine-all '((a) (b)) '((1) (2)))
 
 ;;Testing Assoc
  (defparameter *Operators-Year1*
-   '(AttackR (SASA FBIA GSG9A GIGNA SPETSNAZA))
+   '((AttackR (SASA FBIA GSG9A GIGNA SPETSNAZA))
    (DefendR (SASD FBID GSG9D GIGND SPETSNAZD))
    (Attack1 (FBIA SASA SASA GSG9A GIGNA))
    (Defend1 (FBID FBID SASD GSG9D GIGND))
-   (UKUSA SAS SAS FBI FBI GIGN)
-   (WEUR SPETSNAZ SPETSNAZ GSG9 GSG9 GIGN)
    (SASA Thacter Sledge)
    (SASD Mute Smoke)
-   (GSG9A  IQ Blitz)
+   (GSG9A IQ Blitz)
    (GSG9D Yeager Bandit)
    (FBIA Thermite Ash)
    (FBID Castle Pules)
    (GIGNA Montange Twitch)
    (GIGND Doc Rook) 
    (SPETSNAZA Glaz Fuze)
-   (SPETSNAZD Kapkan Tachanka))
+   (SPETSNAZD Kapkan Tachanka)))
 
 (defparameter *Operators-Year11*
   '((Rainbow (SAS) (FBI) (GSG9) (GIGN) (SPETSNAZ))
@@ -302,24 +302,18 @@ e.g., (combine-all '((a) (b)) '((1) (2)))
   (elt choice (random (length choice))))
 
 (defun R6TeamGen (Team)
-  "Generates an R6 Team based weather DF or OF"
+  "Generates an R6 Team.  Choices for Teams are:
+attackr, defendr, attack1, defend1"
   (cond ((listp team)
          (mapend3 #'r6teamgen team))
         ((rewrites2 Team)
          (r6teamgen (random-elt2 (rewrites2 team))))
         (t (list team))))
-;;This picks random 5 operators
+ ;;WORKS!!!  I don't remember anything... Make sure to write a lot.  
 
-(defun R6TeamGen (Team side)
-  "Generates an R6 Team based weather DF or OF"
-  (cond ((listp team)
-         (mapend3 #'r6teamgen team))
-        ((rewrites2 Team)
-         (if (equal side 'attackers)
-             (r6teamgen (random-elt2 (attackers team)) side)
-             (r6teamgen (random-elt2 (defenders team)) side)))
-        (t (list team))))
-;;Not WORKING
+
+ ;;Exercise 2.4
+ 
 
 
 
