@@ -240,18 +240,36 @@ e.g., (combine-all '((a) (b)) '((1) (2)))
 ;;WORKED!!  Was it what they wanted lol?
 
 ;;How Cond Works?
-(defun conder (x)
-  (cond ((endp x) nil)
-        ((length x)
-         (cons x (conder (rest x))))))
+((defun conder (x)
+   (cond ((endp x) nil)
+         ((length x)
+          (cons x (conder (rest x))))))
 
 ;;Exercise 2.3
 
 
 
 ;;Testing Assoc
-(defparameter *Operators-Year1*
-  '((Rainbow SAS FBI GSG9 GIGN SPETSNAZ)
+ (defparameter *Operators-Year1*
+   '(AttackR (SASA FBIA GSG9A GIGNA SPETSNAZA))
+   (DefendR (SASD FBID GSG9D GIGND SPETSNAZD))
+   (Attack1 (FBIA SASA SASA GSG9A GIGNA))
+   (Defend1 (FBID FBID SASD GSG9D GIGND))
+   (UKUSA SAS SAS FBI FBI GIGN)
+   (WEUR SPETSNAZ SPETSNAZ GSG9 GSG9 GIGN)
+   (SASA Thacter Sledge)
+   (SASD Mute Smoke)
+   (GSG9A  IQ Blitz)
+   (GSG9D Yeager Bandit)
+   (FBIA Thermite Ash)
+   (FBID Castle Pules)
+   (GIGNA Montange Twitch)
+   (GIGND Doc Rook) 
+   (SPETSNAZA Glaz Fuze)
+   (SPETSNAZD Kapkan Tachanka))
+
+(defparameter *Operators-Year11*
+  '((Rainbow (SAS) (FBI) (GSG9) (GIGN) (SPETSNAZ))
     (Team1 FBI SAS SAS GSG9 GIGN)
     (Team2 FBI FBI SAS GSG9 GIGN)
     (UKUSA SAS SAS FBI FBI GIGN)
@@ -262,7 +280,7 @@ e.g., (combine-all '((a) (b)) '((1) (2)))
     (GIGN Montange Twitch Doc Rook )
     (SPETSNAZ Glaz Fuze Kapkan Tachanka)))
 
-(defvar *Operator* *Operators-Year1*)
+(defvar *Operator* *Operators-Year11*)
 ;;once you define this variable it doesn't change when you change parameter
 (defvar *Operator4* *operators-year1*)
 ;;I had to make a new varible to pull up the 
@@ -283,14 +301,27 @@ e.g., (combine-all '((a) (b)) '((1) (2)))
   "randomly choices a choice by first finding a lsit then picks a number randomly ccorresponding to that list and then picks then uses that random number as an index to pick one of the elements out of the list"
   (elt choice (random (length choice))))
 
-(defun R6TeamGen (Team Side)
+(defun R6TeamGen (Team)
   "Generates an R6 Team based weather DF or OF"
   (cond ((listp team)
-         (mapend3 #'r6teamgen ))
+         (mapend3 #'r6teamgen team))
+        ((rewrites2 Team)
+         (r6teamgen (random-elt2 (rewrites2 team))))
+        (t (list team))))
+;;This picks random 5 operators
+
+(defun R6TeamGen (Team side)
+  "Generates an R6 Team based weather DF or OF"
+  (cond ((listp team)
+         (mapend3 #'r6teamgen team))
         ((rewrites2 Team)
          (if (equal side 'attackers)
-             (R6TeamGen (random-elt2 (rewrites2 team)) Side)
-             (R6TeamGen (random-elt2 (rewrites2 team)) Side)))
+             (r6teamgen (random-elt2 (attackers team)) side)
+             (r6teamgen (random-elt2 (defenders team)) side)))
         (t (list team))))
+;;Not WORKING
+
+
+
 
 
