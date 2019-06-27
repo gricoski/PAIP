@@ -245,7 +245,21 @@ e.g., (combine-all '((a) (b)) '((1) (2)))
 ((defun conder (x)
    (cond ((endp x) nil)
          ((length x)
-          (cons x (conder (rest x))))))
+          (cons x (conder (rest x)))))))
+
+ ;;Their Answer for 2.2
+ (defun generate8 (phrase)
+   "Generate a random sentence or phrase"
+   (cond ((listp phrase)
+          (mappend #'generate phrase))
+         ((non-terminal-p phrase)
+          (generate (random-elt (rewrites phrase))))
+         (t (list phrase))))
+ 
+ (defun non-terminal-p (category)
+   "True if this is a category in the grammar."
+   (not (null (rewrites category))))
+ 
 
 ;;Exercise 2.3
 
@@ -313,9 +327,25 @@ attackr, defendr, attack1, defend1"
 
 
  ;;Exercise 2.4
- 
+ ;;Create a function that calculates the cross product of functions on two variables
+ (defun Icross-product (fn x1 x2)
+   "calculates the cross product of a functoin on two variables"
+   (lambda #'fn x1 '(lambda X'fn x2)))
+ ;;Noped
 
+ (defun mapend (fn the-list)
+   "Apply fn to each element in list"
+   (if (null the-list)
+       nil
+       (append (funcall fn (first the-list))
+               (mapend fn (rest the-list)))))
 
+ (funcall #' + '(2 5))
+ (apply #' + 3 6)
 
+ ((lambda (x) (+ x 2)) 4)
 
+ (funcall #'(lambda (x) (+ x 2)) 4)
+ (mapcar #'(lambda (x) (+ x x)) '(1 2 3 4)))
+(mapend #'(lambda (l) (list l (reverse 1))) '((1 2 3) (a b c)))
 
