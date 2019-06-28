@@ -347,5 +347,7 @@ attackr, defendr, attack1, defend1"
 
  (funcall #'(lambda (x) (+ x 2)) 4)
  (mapcar #'(lambda (x) (+ x x)) '(1 2 3 4)))
-(mapend #'(lambda (l) (list l (reverse 1))) '((1 2 3) (a b c)))
+(mapend #'(lambda (l) (list l (reverse l))) '((1 2 3) (a b c)))
+
+
 
