@@ -89,5 +89,14 @@
 
 
 ;;Use cond and if to return values
-;;Use others to take action
+;;Use when and unless when there is only one possiblity
+
+(defun tax-bracket (income)
+  "Determine what percent tax should be paid for this income"
+  (cond ((< income 10000.00) 0.00)
+        ((< income 30000.00) 0.20)
+        ((< income 50000.00) 0.25)
+        ((< income 70000.00) 0.30)
+        (t 0.35))); no parathesis needed at the end.
+
 
