@@ -61,4 +61,33 @@
 
 ;;Next Section is Special Forms for Conditionals
 
+;;Nil is the only False value when it comes to conditionals like "IF"
+
+;;(cond) clauses
+;;As soon as a test expression evalutes to non-nil it returns it's
+;;Results expression.  If no REsults expression it returns the value
+;;of the test expresssion
+;;If all test expressions evalute to nill, then NIL
+
+
+;;(when) and (Unless)
+;;Have only one test expression, but unliminted result expressions
+
+;;(or) and (and)
+
+(and (> n 100)
+     (princ "N is large"))
+
+(or (<= n 100)
+    (princ "N is large."))
+
+(cond ((> n 100)
+       (princ "N is large.")))
+
+(when (> n 100)
+  (princ "N is large."))
+
+
+;;Use cond and if to return values
+;;Use others to take action
 
