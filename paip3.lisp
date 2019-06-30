@@ -99,4 +99,48 @@
         ((< income 70000.00) 0.30)
         (t 0.35))); no parathesis needed at the end.
 
+;;Examples of Case and their Cond Equivalant
+;;Not ont he list is ccase and ctypcase that allow you to enter a new value if error
+
+;CASE and Cond Equivilant
+(case x
+  (1 10)
+  (2 20))
+
+(cond
+  ((eql x 1) 10)
+  ((eql x 2) 20))
+
+;;Examples to REPL
+(funcall #'(lambda (x) (case x
+                         (1 10)
+                         (2 20)))2)
+
+(funcall #'(lambda (x) (cond ((eql x 1) 10)
+                             ((eql x 2) 20))) 1)
+
+;;Or a regular function example
+(defun mycase (x)
+  "Example of using case.  Pick 1 or 2"
+  (case x
+    (1 10)
+    (2 10)))
+
+;;Creating Tax-Bracket Function with Case
+(defun mytax (x)
+  "Example of ")
+
+;;Typecase and Cond equivalant
+(typecase x
+  (number (abs x))
+  (list (length x)))
+
+(cond
+  ((typep x 'number) (abs x))
+  ((typep x 'list) (length x)))
+
+
+
+
+
 
