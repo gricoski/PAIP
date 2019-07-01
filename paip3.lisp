@@ -128,7 +128,11 @@
 
 ;;Creating Tax-Bracket Function with Case
 (defun mytax (x)
-  "Example of ")
+  "Example of Tax Bracket Function"
+  (case
+      ((< x 10000.00) 0.00)
+    ((> x 10000.00) 0.20)))
+;Does not work.
 
 ;;Typecase and Cond equivalant
 (typecase x
@@ -138,6 +142,78 @@
 (cond
   ((typep x 'number) (abs x))
   ((typep x 'list) (length x)))
+
+(defun mytype (x)
+  (typecase x
+    (number (abs x))
+    (list (length x))
+    (atom x)))
+
+;;ecase and cond equivalent
+(ecase x
+  (1 10)
+  (2 20))
+
+(cond
+  ((eql x 1) 10)
+  ((eql x 2) 20)
+  (t (error "no valid case")))
+
+(funcall #'(lambda (arg) (ecase arg
+                           (1 10)
+                           (2 20))) 3)
+;;Gives Error
+
+(funcall #'(lambda (arg) (ecase arg
+                           (1 10)
+                           (2 20))) 1)
+;;Works
+
+(defun myecase (x)
+  (ecase x
+    (a 'apple)
+    (b 'ball)))
+;;If you pick c it says this:
+;;"C fell through ECASE expression. Wanted one of (A B)."
+
+(defun myconde (x)
+  (cond ((eql x 'a) 'apple)
+        ((eql x 'b) 'ball)
+        (t (error "Choose a or b dummy"))))
+;;If you pick c it says choose a or b dummy
+
+;;etypecase and cond equivilant
+(etypecase x
+  (number (abs x))
+  (list (length x)))
+
+(cond
+  ((typep x 'number) (abs x))
+  ((typep x 'list) (length x))
+  (t (error "no valid typecase")))
+
+(defun myEtypecase (x)
+  (etypecase x
+    (number (float x))
+    (list (length x))))
+
+;;Special Forms for Dealing with Variables and Places
+
+;;setf assign a new value to a variable or place
+;;setf is like = or := in other languages
+
+;;Examples
+(setf x 0)
+(setf (aref A i j) 0)
+(setf (rest list) nil)
+(setf (name-middle b) 'Q)
+
+;;A place or generalized variable is a name for a location that
+;;can have a value stored in it
+
+;;You can extrend expressions allowed in setf with
+;; defsetf (page 514) and define-setf-method (page 884)
+
 
 
 
