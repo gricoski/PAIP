@@ -205,15 +205,44 @@
 ;;Examples
 (setf x 0)
 (setf (aref A i j) 0)
-(setf (rest list) nil)
+((setf (rest list) nil))
 (setf (name-middle b) 'Q)
 
-;;A place or generalized variable is a name for a location that
-;;can have a value stored in it
+ ;;A place or generalized variable is a name for a location that
+ ;;can have a value stored in it
 
-;;You can extrend expressions allowed in setf with
-;; defsetf (page 514) and define-setf-method (page 884)
+ ;;You can extrend expressions allowed in setf with
+ ;; defsetf (page 514) and define-setf-method (page 884)
 
+;;rplcd is similar to setf except some differences
+(rplacd list nil) ;returns list
+(setf (rest list) nil) ;returns nil
+;;Most just use Setf
+
+;;Very common for new variables to be established
+;;but they never change
+
+;;New Variables are introduced as parameters in functions
+;;Or introduce new variables in functions with let
+
+;;Examples
+
+(let ((x 40) (y (+ 1 2)))
+  (+ x y))
+
+;;Defining local variables is the same as defining parameters to a anon function
+((lambda (x y)
+   (+ x y))
+ 40
+ (+ 1 1))
+
+;; let* is appropiate when you want to use one ofthe newly introduced variables
+;;in a subsequent value
+
+(let* ((x 6) (y (* x x)))
+  (+ x y))
+;;If we used regular let instead of let* then y's value would not be what we want
+;;As x would not have had it's value already assigned if we only used let
 
 
 
