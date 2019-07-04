@@ -244,6 +244,63 @@
 ;;If we used regular let instead of let* then y's value would not be what we want
 ;;As x would not have had it's value already assigned if we only used let
 
+;;Exercise 3.1
+(funcall #'(lambda (y) (* y y)) 3)
+;;Args must be in paranthesis
+
+(funcall #'(lambda (x y) (+ x y)) 10 15)
+
+(funcall #'(lambda (x y) (+ x y)) 5 (lambda (x) (* x x)))
+;;Does not work
+
+(funcall #'(lambda (x y) (+ x y)) 5 ((lambda (x) (* x x)) 5))
+;;Works, but...
+
+(funcall #'(lambda (x y) (+ x y)) 5 ((lambda (x) (* x x)) x))
+;;Does not work, x unbound
+
+(funcall #'(lambda ((lambda (x) x) 5) (lambda (x) (* x x)) x))
+;;Trash
+
+(funcall #'(lambda (x y) (+ x y)) 5 5)
+;;Works
+
+(funcall #'(lambda (x y) (+ x y)) 5 ((* x x)))
+;;Does not work
+
+(funcall #'(lambda (x y) (+ x y)) ((lambda (x) (* x x)) 5) 5)
+;;Works, but...
+
+(funcall #'(lambda (x y) (+ x y)) ((lambda (x) (* x x) x) 5))
+;;Does not work
+
+(funcall #'(lambda (x y) (+ x y))
+         ((lambda (x) (list (* x x) x)) 5))
+;;did not work
+
+(funcall #'(lambda (x y) (+ x y))
+         ((lambda (x) (result (* x x)) (result x)) 5))
+;;Does not work
+;; Going to move on for now
+
+;;Push - will change the first element of a list
+(push x list)
+;;Example
+(funcall #'(lambda (x lit) (push x lit)) 'a '(1 2 3))
+;;Equivalent code
+(setf list (cons x list))
+
+;;Pop - Returns and Removes first element of a list
+(pop list)
+;;Example
+(funcall #'(lambda (lit) (pop lit)) '(1 2 3))
+;;Equivalent code
+(let ((result (first list)))
+  (setf list (rest list))
+  result)
+
+
+
 
 
 
