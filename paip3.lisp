@@ -299,6 +299,52 @@
   (setf list (rest list))
   result)
 
+;;incf - increments a value by one
+(incf x)
+;;decf - decreases a value by one
+(decf x)
+;;Note value should be a symbol or location
+
+;;Optionally you can increment or decuase by more by adding a number args
+(incf x 14)
+;;Will increase value by 14
+(decf x 5)
+;;Will decrease value by 5
+
+;;Create a program that determines who wins based on a player and score
+
+(defstruct player (score 0) (wins 0))
+
+(defun determine-winner (players)
+  "increment the wins for the player with the highest score."
+  (incf (player-wins (first (sort players #'>
+                                  :key #'player-score)))))
+
+(defun determine-winner (players)
+  "Increment the wins for the player with the highest score."
+  (let ((temp (first (sort players #'> :key #'player-score))))
+    (setf (player-wins temp) (+ (player-wins temp) 1))))
+
+;;Next Section is going over Loops
+;;List of Loops to Cover
+;;Dolist - loop over elements of a list
+;;Dotimes - loop over successive integers
+;;Do or do* - general loop, sparse syntax
+;;loop - general loop, verbose syntax (seem elm)
+;;mapc or mapcar - loop over elements of lists
+;;Some or every - loop over list until conditional
+;;find or reduce - more specific looping functions
+;;RECURSION - General Repetition
+
+;;Examples of each recreating the length function
+
+;;Dolist length Example
+(defun dolist-length (list)
+  "calculates the length yo"
+  (let ((len 0))
+    (dolist (element list)
+      (incf len))
+    len))
 
 
 
