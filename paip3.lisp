@@ -346,9 +346,35 @@
       (incf len))
     len))
 
+;;Same example but using the optional result of do list
+(defun dolist2-length (list)
+  (let ((len 0))
+    (dolist (element list len)
+      (incf len))))
 
+;;Length using mapc
+(defun mapc-length (list)
+  (let ((len 0))
+    (mapc #'(lambda (element)
+              (incf len))
+          list)
+    len))
 
+;;Mapc is like mapcar except mapcar returns the result in a list
+(defun mapcar-length (list)
+  (let ((len 0))
+    (mapcar #'(lambda (element)
+                (incf len))
+            list)
+    len))
+;;Result was not a list in this situation
 
-
+;;dotimes example (can't be a length)
+(defun dotimes1 (x)
+  "prints a word 3 times"
+  (dotimes (x 3)
+    (* 2 2))
+  )
+;;Did not work
 
 
