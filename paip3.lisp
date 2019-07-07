@@ -377,4 +377,34 @@
   )
 ;;Did not work
 
+;;Do form:
+(do ((variable initial next)...)
+    (exit-test results)
+  body...)
+
+;;Do - Loop repeats until exit-test is true
+(defun do-length (list)
+  (do ((len 0) (+ len 1)) 
+      (l list (rest l)))
+  ((null 1) len))
+;;Very unspecific
+
+;;Loop - alien syntax for lisp
+
+(defun loop1-length (list)
+  (loop for element in list
+        count t))
+
+(defun loop2-length (list)
+  (loop for element in list
+        summing 1))
+
+(defun loop3-length (list)
+  (loop with len = 0
+        until (null list)
+        for element = (pop list)
+        do (incf len)
+        finally (return len)))
+
+
 
