@@ -406,5 +406,41 @@
         do (incf len)
         finally (return len)))
 
+;;Count-if - counts number of elements satisfyuing a predicate
+
+;;MyTry
+(defun mycountif (x)
+  "returns the count of numbers in the
+first level of a list"
+  (count-if #'numberp X))
+;;Does not work with string, list, qouted list
+;;Saw an example of below using oddp, I tried numberp
+
+
+;;Their Example
+(defun length-countif (list)
+  (count-if #'True list))
+
+(defun true (x) t)
+
+;;Position-if - finds position of an element that satisfies predicate
+(defun mypositionif (list)
+  (if (null list)
+      0
+      (+ 1 (position-if #'true list :from-end t))))
+
+;;Idioms - things to use over and over as needed
+
+;;Makes numbers negativbe
+(mapcar #'- '(1 2 3))
+;;Matrix adding below returns (11 22)
+(mapcar #'+ '(1 2) '(10 20))
+;;Matrix adding more lists still returns still the same on lies
+(mapcar #'+ '(1 2) '(10 20) '(100 200))
+;;My try of matrix multiplication
+(mapcar #'* '(2 2) '(3 5))
+;;WORKED!!
+;;This can be used to multiple inputs by their weights in neural network or perceptron
+
 
 
