@@ -442,5 +442,30 @@ first level of a list"
 ;;WORKED!!
 ;;This can be used to multiple inputs by their weights in neural network or perceptron
 
+;;remove an element from a list
+(remove 1 '(1 2 3 2 1 0 -1))
+
+;;Use a key to set paremeters
+(remove 1 '(1 2 3 2 1 0 -1) :key #'abs)
+;;Removes all 1s even negative
+
+;;removes element if it passess a test
+(remove 1 '(1 2 3 2 1 0 -1) :test #'<)
+;;removes all numbers greater than 1
+
+;;Set a start postion for when things will be removed
+(remove 1 '(1 2 3 2 1 0 -1) : start 4)
+;;Removes only the 1 before the 0
+
+;;Remove-if similiar to remove but uses a predicate instaed of an element to match
+(remove-if #'oddp '(1 2 3 2 1 0 -1))
+;;Removes only the odd numbers
+
+(remove-if-not #'oddp '(1 2 3 2 1 0 -1))
+;;Removes only the even numbers
+
+(find-if #'evenp '(1 2 3 2 1 0 -1))
+;;Returns the first even number
+
 
 
