@@ -467,5 +467,9 @@ first level of a list"
 (find-if #'evenp '(1 2 3 2 1 0 -1))
 ;;Returns the first even number
 
+(setf x '(a b c))
+(setf y '(1 2 3))
 
+;;Functions that work on variables above
+(every #'oddp y)
 
