@@ -472,4 +472,18 @@ first level of a list"
 
 ;;Functions that work on variables above
 (every #'oddp y)
+;;Test if every element matches a predicate or satisfies a predicate
+(some #'oddp y)
+;;Test if SOME elements matche or satsify a predicate
+(mapcar #'- y)
+;;Applies a function to each element and return resutls
+(mapc #'print y)
+;;performs operation on each elment
+
+;;Following all have -if and -if-not versions, and accept keyword Arguments
+
+(member 2 '(1 2 3))
+;;find element and returns it and everything else after it
+
+
 
