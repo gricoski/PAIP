@@ -485,5 +485,70 @@ first level of a list"
 (member 2 '(1 2 3))
 ;;find element and returns it and everything else after it
 
+(count 'b x)
+;;Counts the number of matching elements
 
+(delete 1 y)
+;;removes that element from that list for that given moment does not actually delete
+
+(find 2 y)
+;;Finds first element that matches criteria and returns it
+
+(position 'a x)
+;;Returns numerical position of element in list
+
+(reduce #'+ y)
+;;applies function to successive elemtents
+;;Could work for PERCEPTRON!!
+
+(remove 2 y)
+;;Like delete but makes a new copy??  Have not seen difference from delete yet
+
+(substitute 4 2 y)
+;;Replace the second element (2) with the first element (4) in list (y)
+
+;;Repition through Recursion
+(defun recurlength (list)
+  (if (null list)
+      0
+      (+ 1 (recurlength (rest list)))))
+
+(defun 2forV (x)
+  "replaces the number 2 with v in the first level of a list"
+  (if (equal (first x) '2)
+      (cons 'V (2forV (rest x)))
+      (cons (first x) (2forV (rest x)))))
+;;Infinite Loop: ERROR
+
+(defun 2forvCONS (x)
+  "replaces any 2 with v, first level using cons"
+  (cond ((null x) nil)
+        ((equal (first x)
+                '2)
+         (cons 'V (2forVCONS (rest x))))
+        (t (cons (first x) (2forvcons (rest x))))))
+;;WORKS!!
+
+(defun 2forv2 (x)
+  "replaces the number 2 with v
+ in first level using nested if statement"
+  (if (equal (first x) '2)
+      (cons 'V (2forv2 (rest x)))
+      (if (null x)
+          nil
+          (cons (first x) (2forv2 (rest x))))))
+;;WORKS!!
+
+(defun 2forv3 (x)
+  "replaces the number 2 with v
+ in first level using nested if statement"
+  (if (equal (first x) '2)
+      (cons 'V (2forv2 (rest x)))
+      (or
+          nil
+          (cons (first x) (2forv2 (rest x))))))
+;;WORKS!! But, WHY??
+;;As it goes deeper into recursion, the or statement goes with the first true
+;;Is the rest of x nil? if no then look at the rest
+;;Then once it gets to the end, is returning element nil?
 

@@ -15,7 +15,7 @@
 
 (defvar *inners2* *inputs*)
 
-(defvar inputs '(1 3 2 14))
+(defvar inputs '(1 3 5 14))
 
 (defvar weights '(.36 .25 .11 .14))
 
@@ -27,9 +27,10 @@
 ;;This did not work
 
 ;;Use Mapcar
-(mapcar #'* inputs weights)
+(setf k (mapcar #'* inputs weights))
 ;;WORKED!!!
 
+(setf sumk (reduce #'+ k))
 
 
 
