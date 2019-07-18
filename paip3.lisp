@@ -552,3 +552,36 @@ first level of a list"
 ;;Is the rest of x nil? if no then look at the rest
 ;;Then once it gets to the end, is returning element nil?
 
+;;The recurcsive length uses more memory, but recursion doesn't always.. Like these
+
+(defun length-recur2 (list)
+  (length-recur2-aux list 0))
+
+(defun length-recur2-aux (sublist len-so-far)
+  (if (null sublist)
+      len-so-far
+      (length-recur2-aux (rest sublist) (+ 1 len so far))))
+
+;;Making the function above clearner by embedding the function within
+
+(defun length-recur3 (list &optional (len-so-far 0))
+  (if (null list)
+      len-so-far
+      (lenght-recur3 (rest list) (+1 len-so-far))))
+
+;;Another Version
+
+(defun length-recur4 (the-list)
+  (labels
+      ((length-recur4 (list len-so-far)
+         (if (null list)
+             len-so-far
+             (length-recur4 (rest list) (+ 1 len-so-far))))
+       (length-recur4 the-list 0))))
+
+;;Labels or flet are used to introduce one or more local functions
+
+(labels ((function-name (parameter..) function body) ...)
+  body-of-lables)
+
+;;Other special forms
