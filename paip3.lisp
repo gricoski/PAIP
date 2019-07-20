@@ -585,3 +585,48 @@ first level of a list"
   body-of-lables)
 
 ;;Other special forms
+
+
+;;Progn can be used to evaluate a sequence of forms and return the value of the last one
+(progn (setf x 0) (setf x (+ x 1)) x)
+;;returns 1
+
+;;Progn Samples
+(if (> x 100)
+    (progn (print "too big")
+           (setf x 100))
+    x)
+
+;;This could also work
+(cond ((> x 100)
+       (print "too big")
+       (setf x 100))
+      (t x))
+
+;;Writing this one just to get to Macros as next section
+(defun product (numbers)
+  "Multiply all the numbers together to compute their product."
+  (let ((prod 1))
+    (dolist (n numbers prod) ;Hate weird loops in lisp
+      (if (= n 0)
+          (return 0)
+          (setf prod (* n prod)))
+      )))
+
+;;My simple version of this with controls
+(defun myprod (liste)
+  "multiply all numbers in list"
+  (cond ((endp liste) 1) ;Tried with nil got error
+        ((zerop (first liste)) 0)
+        ((numberp (first liste))
+         (* (first liste) (myprod (rest liste))))
+        (t (myprod (rest liste))))) ;Atoms still giving error, but all numbers work!
+
+;;My simple version Second Try to control for letters
+(defun myprod2 (liste)
+  "multiply all numbers in list"
+  (cond ((endp liste) 1) ;Tried with nil got error
+        ((zerop (first liste)) 0)
+        ((numberp (first liste))
+         (* (first liste) (myprod (rest liste))))
+        (t (cons 1 (myprod (rest liste)))))) ;Atoms still giving error, but all numbers work!
