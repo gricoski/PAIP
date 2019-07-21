@@ -628,5 +628,16 @@ first level of a list"
   (cond ((endp liste) 1) ;Tried with nil got error
         ((zerop (first liste)) 0)
         ((numberp (first liste))
-         (* (first liste) (myprod (rest liste))))
-        (t (cons 1 (myprod (rest liste)))))) ;Atoms still giving error, but all numbers work!
+         (* (first liste) (myprod2 (rest liste))))
+        (t (or
+            (myprod2 (first liste))
+            (myprod2 (rest liste)))))) ;Atoms still giving error, but all numbers work!
+
+(defun myprod3 (liste)
+  "Multiply numbers no letters"
+  (cond ((null liste) 1)
+        ((numberp (first liste))
+         (* (first liste) (myprod3 (rest liste))))
+        (t (myprod3 (rest liste)))))
+;;WORKS!!! - Had to get rid of zerop.  Tried a few other things, but need to remember
+;;Test the simple things first then go deeper!!
