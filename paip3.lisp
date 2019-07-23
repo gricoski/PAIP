@@ -641,3 +641,17 @@ first level of a list"
         (t (myprod3 (rest liste)))))
 ;;WORKS!!! - Had to get rid of zerop.  Tried a few other things, but need to remember
 ;;Test the simple things first then go deeper!!
+
+;;MACROS
+
+;;Is it required.. It's writing a new lisp that has your macro...
+
+;;EXAMPLE
+
+(defmacro while (test &rest body)
+  "Repeat body while test is treu."
+  (list* 'loop
+         (list 'unless test '(return nil))
+         body))
+
+
