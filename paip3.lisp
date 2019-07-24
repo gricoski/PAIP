@@ -654,4 +654,27 @@ first level of a list"
          (list 'unless test '(return nil))
          body))
 
+;;list* is like list except it takes the last argument and appends it to the end.
+
+;;Use Macroexpand to see what it expands into
+(macroexpand-1 '(while (< i 10)
+                 (print (* i i))
+                 (setf i (+ i 1))))
+
+setf i 7
+(while (< i 10)
+       (print (* i i))
+       (setf i (+ i 1)))
+;;I don't get this yet... Keep looking
+
+;;Backqoute Notation
+
+;;Building the code that is the expansion of the macro...
+;;Using Subst (subst new old tree) substitues new for each occurence of old anywhere within tree
+(defmacro while (test &rest body)
+  "Repeated body while test is true"
+  (let ((code '(loop (unless test (return nil)) . body)))
+    (subst test 'test (subst body 'body code))))
+
+;;Using backqoute notation instead of subst 
 
