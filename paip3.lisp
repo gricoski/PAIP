@@ -678,3 +678,20 @@ setf i 7
 
 ;;Using backqoute notation instead of subst 
 
+(defmacro while (test &rest body)
+  "Repeat body while test is true"
+  `(loop (unless ,test (return nil))
+         ,@body))
+
+> (setf testl '(a test)) => (A TEST)
+
+> '(this is ,test1) => (THIS IS (A TEST))
+
+> '(this is ,@test1) => (THIS IS A TEST)
+
+> '(this is . ,test1) => (THIS IS A TEST)
+
+> '(this is ,@test1 -- this is only ,@testl) =>
+(THIS IS A TEST -- THIS IS ONLY A TEST)
+
+//Might get the other book or got to chap 4, getting bored...
