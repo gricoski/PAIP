@@ -695,3 +695,36 @@ setf i 7
 (THIS IS A TEST -- THIS IS ONLY A TEST)
 
 //Might get the other book or got to chap 4, getting bored...
+
+;;Functions that operate on lists
+
+(setf x '(a b c))
+(setf y '(1 2 3))
+
+(first x)
+(second x)
+(third x)
+(nth 0 x) ;;0 can be changed to another number
+(rest x) ;;Gives everything after first element
+(car x) ;;Another name for first
+(cdr x) ;;Another name for rest
+(last x) ;;Gives last element
+(length x)
+(reverse x)
+(cons 0 '(1 2 3))
+(append x y)
+(list x y)
+(list* 1 2 x) ;;Adds last element to others
+(null nil)  ;;Returns T
+(listp x) ;;T, becuase x is the name of a list
+(listp 3) ;;nil
+(consp x) ;;T becuase x is a non-nil list
+(consp nil) ;;nil it's not a non-nil list
+(equal x x) ;;T
+(equal x y) ;;nil
+(sort y #'>) ;; Takes the list y (1 2 3) and returns (3 2 1)
+(subseq x 1 2) ;;Returns b as it gives the subsequence between a start and a end
+
+;;Lists are made out of cons cells with two fields
+;;First
+;;Rest
