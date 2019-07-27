@@ -728,3 +728,12 @@ setf i 7
 ;;Lists are made out of cons cells with two fields
 ;;First
 ;;Rest
+
+;;Write a function that writes in dotted piar notation
+;;Use cons
+(cons 'both_things_must_be 'atoms)
+(defun ex1 (item1 item2)
+  "print an expression in dotted pair notation"
+  (cons item1 item2))
+
+
