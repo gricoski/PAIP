@@ -732,8 +732,34 @@ setf i 7
 ;;Write a function that writes in dotted piar notation
 ;;Use cons
 (cons 'both_things_must_be 'atoms)
-(defun ex1 (item1 item2)
+
+(defun ex1 (liste)
   "print an expression in dotted pair notation"
-  (cons item1 item2))
+  (cond ((null liste) nil)
+        ((atom (rest liste))
+         (cons (first liste) (rest liste)))
+        (t (or (cons (first liste) (ex1 (rest liste)))
+               (cons (first liste) (ex1 (first (rest liste))))))))
+
+;;Equality and Internal Representation
+;;When lisp reads a symbol from 2 places its guaranteed to be the exact same
+;;As lisp maintains a symbol table
+;;Lists stored in seperate locations are not identical
+;;As they are read using cons and lists are composed of different cons cells
+
+(eq 'x 'x) ;t
+(eq '0 '0) ;Depends on implementation
+(eq '(x) '(x)) ;nil
+(eq '"xy" '"xy") ;nil
+(eq '"Xy" '"xY"); nil
+(eq '0 '0.0) ;nil
+
+(eql 'x 'x) ;T
+(eql '0 '0) ;T
+(eql '(x) '(x)) ;nil
+(eql '"xy" '"xy") ;nil
+
+
+(equal '(x) '(x)) ;T
 
 
