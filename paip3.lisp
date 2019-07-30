@@ -758,8 +758,26 @@ setf i 7
 (eql '0 '0) ;T
 (eql '(x) '(x)) ;nil
 (eql '"xy" '"xy") ;nil
+(eql '"Xy" '"xY") ;nil
+(eql '0 '0.0) ;nil
+(eql '0 '1) ;nil
 
-
+(equal 'x 'x) ;T
+(equal '0 '0) ;T
 (equal '(x) '(x)) ;T
+(equal '"xy" '"xy") ;T
+(equal '"Xy" '"xY") ;Nil
+(equal '0 '0.0) ;Nil
+(equal '0 '1) ;Nil
+
+(equalp 'x 'x) ;T
+(equalp '0 '0) ;T
+(equalp '(x) '(x)) ;T
+(equalp '"xy" '"xy") ;T
+(equalp '"Xy" '"xY") ;T
+(equalp '0 '0.0) ;T
+(equalp '0 '1); Nil
+
+
 
 
