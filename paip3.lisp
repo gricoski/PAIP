@@ -778,6 +778,19 @@ setf i 7
 (equalp '0 '0.0) ;T
 (equalp '0 '1); Nil
 
+;;Functions on Sequences
+
+;;Lips added vector and strings so there are specific new functions that can work on these
+(nth 0 '(1 2 3)) ; 1
+(nth 0 '"This is a string") ; error
+(nth 0 '#(1 2 3)) ; error as this is a vector and not a list
+
+
+;;Elt works on everything
+(elt '(1 2 3) 0) ;1
+(elt '#(1 2 3) 0) ;1
+(elt '"This is a string" 0) ;#\T
+
 
 
 
