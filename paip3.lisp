@@ -791,6 +791,36 @@ setf i 7
 (elt '#(1 2 3) 0) ;1
 (elt '"This is a string" 0) ;#\T
 
+;;other sequences codes
+(aref array n)
+(char string n)
+(bit vector n)
+(sbit simple-bit vector n)
+(svref simple-vector n)
 
+;;TABLES
+
+;;An associated list is a list used to implement tables
+;;a list of dotted pairs with a key and a vlaue.
+
+;;Creating a table
+(setf newTable
+      '((AL . Alabama) (PA . Pennsylvania) (CA . California) (IN . Indiana) (VN . Vietname)))
+
+;;To serach by Key
+(assoc 'PA newtable) ;returns (PA . Pennsylvania)
+
+(cdr (assoc 'PA newtable)) ;returns Pennsylvania
+
+;;To search by Value
+(rassoc 'California newtable) ;returns (CA . California)
+
+(car (rassoc 'California newtable)) ;returns CA
+
+;;Assoc searches thourhg the whole list one element at a time
+;;THIS CAN BE SLOW
+
+;;Instead make a has table
+(setf newtable2 (make-hash-table))
 
 
