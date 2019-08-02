@@ -823,4 +823,34 @@ setf i 7
 ;;Instead make a has table
 (setf newtable2 (make-hash-table))
 
+(setf (gethash 'LB newtable2) 'LongBeach)
+(setf (gethash 'SF newtable2) 'Frisco)
+(setf (gethash 'HB newtable2) 'Harrisburg)
+
+(gethash 'LB newtable2) ;Returns LONGBEACH T
+(gethash 'SF newtable2) ;Returns FRISCO T
+
+(remhash) ; used to remove a key/value pair
+
+(remhash 'HB newtable2)
+(gethash 'HB newtable2) ;Returns NIL NIL
+
+(maphash) ;can be used map over key value pairs
+
+(clrhash) ;Clears the entire hashtable
+
+(clrhash newtable2)
+(gethash 'SF newtable2) ;Nil Nill
+
+;;The other table is property lists
+
+(setf (get 'PA 'State) 'Pennsylvania)
+(setf (get 'CA 'State) 'California)
+
+(get 'CA 'state) ;returns califronia
+(get 'pennsylvania 'state) ;Nil - there is no rassoc, you have to create a function if you want to pull abbreviations
+
+(setf (get 'Pennsylvania 'abbrev) 'PA)
+(get 'Pennsylvania 'abbrev) ; Returns PA
+
 
