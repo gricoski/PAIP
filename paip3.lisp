@@ -843,6 +843,7 @@ setf i 7
 (gethash 'SF newtable2) ;Nil Nill
 
 ;;The other table is property lists
+;;p-lists
 
 (setf (get 'PA 'State) 'Pennsylvania)
 (setf (get 'CA 'State) 'California)
@@ -854,3 +855,32 @@ setf i 7
 (get 'Pennsylvania 'abbrev) ; Returns PA
 
 
+;;a-lists
+(setf 'TX . 'Texas) ;Didn't WORK!!
+
+;;Mimicking a-lists, put all properties under one LIST
+(setf (symbol-plist 'Stater)
+      '(AL Alabama AK Alaska AZ Arizona AR Arkansas))
+(get 'stater 'AL) ;;Returns Alabama
+
+;;Property lists are not used because of mess and no way to clrhash and stuff
+
+;;FUNCTIONS on TREEs
+
+((a b) ((c)) (d e))
+;;Most functions treat this as 3 elements
+
+;;Tree functions see it as 3 with 5 non-nill leaves
+
+(setf approvedTREES '((a b) ((c)) (d e)))
+
+(tree-equal approvedtrees (copy-tree approvedtrees)) ;Returns True
+
+(defun same-shape-tree (a b)
+  "Are two trees teh same except for the the leaves?"
+  (tree-equal a b :test #'true))
+
+(defun true (&rest ignore) t)
+
+(same-shape-tree approvedTREEs '((1 2)) ((3)) (4 5))
+;;Didn't Work... Fix
