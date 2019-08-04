@@ -884,3 +884,38 @@ setf i 7
 
 (same-shape-tree approvedTREEs '((1 2)) ((3)) (4 5))
 ;;Didn't Work... Fix
+
+(same-shape-tree approvedtrees '((1 2) ((3)) (4 5)))
+;;This works - Parathesis were off
+
+;;Substituing Expressions
+
+(subst 'new 'old '(old ((very old)) (new ((very new))))) ;;Setting things up for substitues
+
+;;Substitute list
+(sublis '((old . new)) '(old (very old)));; Returns (new (very new))
+
+(subst 'new 'old 'old) ;;Returns NEW - Why?
+
+(defun english->perot (words)
+  (sublis '((are . va) (book . libre) (friend .ami)
+            (hello . bonjour) (how . comment) (my . mon)
+            (red . rouge) (you . tu))
+          words))
+
+(english->perot '(Hello my friend)) ;Returns (bonjour Mon (.AMI))
+;;FIXING
+
+(defun english->perot (words)
+  (sublis '((are . va) (book . libre) (friend . ami)
+            (hello . bonjour) (how . comment) (my . mon)
+            (red . rouge) (you . tu))
+          words))
+
+(english->perot '(Hello my friend)) ;Returns (bonjour Mon Ami)
+;;WORKS!!
+
+;;Reread and see if you can see the structure better
+
+
+;;Section 3.8 Functions on Numbers
