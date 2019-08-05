@@ -919,3 +919,23 @@ setf i 7
 
 
 ;;Section 3.8 Functions on Numbers
+(+ 7 7) ;Add
+(- 21 7) ;Subtract
+(* 2 7) ;Multiply
+(/ 28 2) ;Divide
+(> 100 99) ;T Greater Than
+(< 99 100) ;T Less Than
+(= 10 10) ;T
+(random 100) ;Picks a random number from 0 to 99 - i got 92
+(expt 3 2) ;Exponentiation (also exp, eX and log)
+(sin pi) ;sine function
+(asin 0) arcsine or sin-1 function (also acos, atan, etc.)
+(min 2 3 4) ;Returns 2 the min number
+(max 2 3 4) ;Returns 4 the max Number
+(abs -3) ;Returns 3 the absolute value
+(sqrt 4) ;2 the square root of 4
+(rount 4.1) ;4
+(rem 7 3) ;1 remainder or 1
+
+;;Functions on Sets
+
