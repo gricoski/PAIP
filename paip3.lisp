@@ -939,3 +939,11 @@ setf i 7
 
 ;;Functions on Sets
 
+;;First Set
+(setf r '(a b c d))
+
+;;Second Set
+(setf s '(c d e))
+
+;; Find what is similar between the first two sets
+(intersection r s)
