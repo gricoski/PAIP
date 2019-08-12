@@ -947,3 +947,26 @@ setf i 7
 
 ;; Find what is similar between the first two sets
 (intersection r s)
+
+;; Find all elements in either of two sets
+(union r s)
+
+;;Find elements in one but not the other
+(set-difference r s)
+
+;;Check if an element is a member of a set and returns it and rest after
+(member 'd s)
+
+;;see if all elements of one set are in another
+(subsetp s r)
+
+;;add an element to a set
+(adjoin 'b s)
+
+;;but will not add duplicates
+(adjoin 'c s)
+
+;;You can also represent a set with a sequence of bits
+;;11110 can be used to represent (a b c d)
+;;00000 can be used to represent an empty set
+;;11001 to represent (a b e)
