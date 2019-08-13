@@ -970,3 +970,13 @@ setf i 7
 ;;11110 can be used to represent (a b c d)
 ;;00000 can be used to represent an empty set
 ;;11001 to represent (a b e)
+;;You can also represent stuff like this as a bit vector
+;;(a b e) would be #*11001 or the number 25 or #b11001
+;;Dong things this way means less space and faster speed under certain conditions
+
+;;Functions on intergers as bit vectors
+(logand #b11110 #b11001)
+(bit-and #*11110 #*11001)
+
+;;Destructive functions
+
