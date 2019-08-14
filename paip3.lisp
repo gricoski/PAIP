@@ -979,4 +979,37 @@ setf i 7
 (bit-and #*11110 #*11001)
 
 ;;Destructive functions
+(setf x '(a b c))
+(setf y '(1 2 3))
 
+x ;;returns (a b c)
+y ;;returns (1 2 3)
+
+;;Then I do this function
+(nconc x y) ;;Returns (A B C 1 2 3)
+
+x ;;returns (a b c 1 2 3)
+y ;;returns (1 2 3)
+
+;;Values were appended together, but then the value of X was changed to appended version
+;;Works by changeing changing the rest field of x to point to y
+;;Conserves storage, but is destructive
+
+;;Destructive functions begin with N, such as:
+
+;;nreverse
+(nreverse y) ;;Returns (3 2 1)
+y ;;returns (1)
+
+
+;;nintersection
+(setf z '(1 2 3 b 4))
+(setf y '(a b c 2))
+
+(nintersection z y) ;;Returns (B 2)
+
+z ;; Returns (1 2) - New Value
+y ;; Returns (A B C 2) - Same value
+
+
+;;nunion
