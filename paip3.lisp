@@ -1012,4 +1012,24 @@ z ;; Returns (1 2) - New Value
 y ;; Returns (A B C 2) - Same value
 
 
-;;nunion
+;;nunion - Unions the data so all is included, but none repeated
+(nunion z y) ;;returns (4 3 1 A B C 2)
+
+z ;;returns (1 A B C 2)
+y ;;returns (A B C 2)
+
+
+;;nset-difference
+(setf c '(1 2 3 A B C))
+(setf d '(2 4 5 B D E))
+
+(nset-difference c d) ;;Returns (C A 3 1) which are all the values that show in C, but not D
+
+C ;; Returns (1)
+D ;; Returns (2 4 5 B D E) - No Change
+
+;;nsubst
+(setf e '(1 2 3 A B C))
+(setf f '(2 4 6 B D e))
+
+(nsubst e f) ;;Error
