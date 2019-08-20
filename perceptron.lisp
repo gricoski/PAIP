@@ -35,5 +35,14 @@
 (defun sigmoid (x)
   (/ 1.0 (+ 1.0 (exp (- x)))))
 
+;;To process Error Rate:
 
+;;Error = (target - output)*Sigmoid (Sumk)
 
+;;The shape of the derivative of the squashing function reduces the effective calculated error when thesum of
+;;product (sumk) for a neuron is very small or very large
+
+;;To apply the error rate?
+(defun dSigmoid (x)
+  (let ((tedmp (sigmoid x)))
+    (* temp (- 1.0 temp))))
