@@ -1033,3 +1033,31 @@ D ;; Returns (2 4 5 B D E) - No Change
 (setf f '(2 4 6 B D e))
 
 (nsubst e f) ;;Error
+(nsubst e f e) ;;Returns (1 2 3 A B C)
+e ;;returns (1 2 3 A B C)
+f ;;returns (2 4 6 B D E)
+
+;;Come Back to Data Types seciont 3.11 as needed
+
+;;3.12
+;;Design your application to read lisp exppresions - IDEAL
+
+;;Read
+
+;;read-char
+
+;;read-line
+
+;;print
+(print 'a) ;;Print any object in a new likne
+
+;;prin1
+(prin1 'a) ;;print any object with the new line and space
+
+;;princ - human readable
+(princ 'a) ;;prints the object with the qoutes - read can't recover original
+
+;;Write - can behave link prin1 or princ depanding on parameters
+(write 'a)
+
+;;Reading, Writing to files...
