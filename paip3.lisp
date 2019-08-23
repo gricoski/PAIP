@@ -1061,3 +1061,20 @@ f ;;returns (2 4 6 B D E)
 (write 'a)
 
 ;;Reading, Writing to files...
+
+;;Create the file test.text and print two expressions
+;;Then open the file for reading and read back the frist expression, a single chartecer
+;;Then two more expressions
+
+(with-open-file (stream "test.text" :direction :output)
+  (print '(I love you Vienna) stream)
+  (princ 'Goodbye Stream))
+;;Returns GOODBYE
+;;If you run twice you get an error, that file exists
+;;but in error menu you can choose to overwrite
+
+(with-open-file (stream "test.text" :direction :input)
+  (list (read stream) (read-char stream) (read stream)
+        (read stream nil 'eof)))
+;;Returns ((I Love you Vienna) #/G OODBYE EOF)
+
