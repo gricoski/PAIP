@@ -1078,3 +1078,14 @@ f ;;returns (2 4 6 B D E)
         (read stream nil 'eof)))
 ;;Returns ((I Love you Vienna) #/G OODBYE EOF)
 
+;;To Print New Lines
+(terpri )
+(fresh-line)
+
+;;Formatting Output
+(format t "I love my Wife!") ;;Format makes it formatted ;;T prints to terminal
+
+;;Other options are instered with ~
+(format t "~&~a Time for bed it is ~s ~f" "Two AM" "Now" 14)
+;;Things get mixed about
+(format t "~&~a plus ~s is ~f" "two" "two" 4) ;;Their example
