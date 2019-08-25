@@ -1089,3 +1089,21 @@ f ;;returns (2 4 6 B D E)
 (format t "~&~a Time for bed it is ~s ~f" "Two AM" "Now" 14)
 ;;Things get mixed about
 (format t "~&~a plus ~s is ~f" "two" "two" 4) ;;Their example
+
+;;~& moves to a fresh line
+;;~a prints the next argument as princ
+;;~s prints the next argument as prin1
+;;~f prints a number as a float, or a letter a princ
+
+;;Format always returns nil.  There are 26 different format directives
+
+;;Complex example:
+(let ((numbers '(1 2 3 4 5)))
+  (format t "~&~{~r~^ plus ~} is ~@r"
+          numbers (apply #'+ numbers)))
+
+;;~r prints a number in english
+(format t ~r '(14)) ;;Error r is not defined
+(format t "~r" '(14)) ;;Err 14 not an integer
+(format t "~r" '14) ;;Returns fourteen
+
