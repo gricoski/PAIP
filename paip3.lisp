@@ -1107,3 +1107,10 @@ f ;;returns (2 4 6 B D E)
 (format t "~r" '(14)) ;;Err 14 not an integer
 (format t "~r" '14) ;;Returns fourteen
 
+;;~{ ... ~} takes the next argument (a list) and formats each element according to whats inside the {}
+(format t ~{~f~^ is a float ~} is a float '(1 2 3)) ;;Error -f-^ is not defined... because i forgout ""
+(format t "~{~f~^ is a float ~} is a float too" (1 2 3)) ;;Error because I forgot to qoute the list that {} acts upon
+(format t "~{~f~^ is a float ~} is a float too" '(1 2 3)) ;;Returns 1.0 is a float 2.0 is a float 3.0 is a float too 
+;;Format is like it's own langauge
+
+;;Debugging Tools
