@@ -1114,3 +1114,46 @@ f ;;returns (2 4 6 B D E)
 ;;Format is like it's own langauge
 
 ;;Debugging Tools
+
+;;Different Methods of Debugging problems in your program in lisp
+
+;;1/3 - Insert print statements, recompile, try again to see where the problem exists
+;;2/3 - Use a debugger to investigator and possibly alter the internal state of the running program
+;;3/3 - Add annotations that are not part of the program, but affect the automatic runnning of the program
+;;This is like the first one except you don't have to go back and remove print lines
+
+;;Examples
+
+(defun wife (hubbyArg)
+  "Automatically corrects hubbyArg"
+  (cond ((endp hubbyarg) nil)
+        ((numberp (first hubbyArg))
+         (princ "I don't care about your made up numbers"))
+        (t (cons 'No (wife (rest hubbyArg))))))
+
+
+(trace wife) - Turn on a print of every return
+(untrace wife) - Turn off trace
+
+;;Step
+
+;;Their Example
+(step (+ 3 4 (* 5 6 (/ 7 8)))) ;;Did not work
+
+(step (wife '(Hello Honey)))  ;;Error panel came up and allowed me to continue the program or stop or only go one step forward
+
+(apropos 'string) ;;prints info about all symbols whose name matches the argument
+(apropos 'number)
+
+Pick that function or any of them and see more information on it
+(describe 'numberp) ;;Tells you about numberp
+
+(documentation 'numberp 'function) ;;Gives you the symbols document string
+(documentation 'wife 'function)
+(documentation 'pi 'variable)
+
+(inspect 'wife) ;;Look at and alter components of complex structures gives you lots of options to explore
+
+;;The regular debugger happens when you have an error, you can force it with break
+
+;;ANTI-Debugging tools - Check for errors and correct automatically like if-error
