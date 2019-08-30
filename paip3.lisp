@@ -1,4 +1,4 @@
-;;PAIP3
+d;;PAIP3
 ;;Overview of Lisp
 
 ;;Be specific
@@ -1157,3 +1157,33 @@ Pick that function or any of them and see more information on it
 ;;The regular debugger happens when you have an error, you can force it with break
 
 ;;ANTI-Debugging tools - Check for errors and correct automatically like if-error
+
+;;Error - invokes the error debug screen with the message your write
+
+(defun average (numbers)
+  (if (null numbers)
+      (error "Average of the empty list is undefined.")
+      (/ (reduce #'+ numbers)
+         (length numbers))))
+
+;;Cerror - is a continuable error.  User can signal to continue
+
+(defun average2 (numbers)
+  (if (null numbers)
+      (progn
+        (cerror "Use 0 as the average."
+                "Average of the empty list is undefined.")
+        0)
+      (/ (reduce #'+ numbers)
+         (length numbers))))
+;;Define my own option of 0 to continue with using 0 as average
+
+;;Ecase - exhastive case - gives an error if no cases matches
+(defun myecase '(tang)
+  "Testing the ecase function"
+  (ecase
+      ((< tang '8)
+       (> tang '9)
+       )))
+
+;;Ccase - asks user for new input to continue
