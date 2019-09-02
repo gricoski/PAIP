@@ -1179,11 +1179,28 @@ Pick that function or any of them and see more information on it
 ;;Define my own option of 0 to continue with using 0 as average
 
 ;;Ecase - exhastive case - gives an error if no cases matches
-(defun myecase '(tang)
+(defun myecase (tang)
   "Testing the ecase function"
-  (ecase
-      ((< tang '8)
-       (> tang '9)
-       )))
+  (ecase tang
+    ((mot ) 1)
+    ((hai ) 2)
+    ((ba ) 3)))
 
 ;;Ccase - asks user for new input to continue
+(defun decode (x)
+  (ccase x
+    ((i uno mot) 1)
+    ((ii dos hai) 2)
+    ((iii tres ba) 3)
+    ((iv cuatro bon) 4)))
+;;if you give a variable not listed it goes to error screen an there is an option to enter a new number in repl
+
+
+;;Check-type - Checks the type of an argument and signals a continuable error if argument has wrong type
+(defun tby14 (x)
+  "Multiply x by 14"
+  (check-type x number)
+  (* x 14))
+
+;;Assert tests an expression and signals an error if false
+
