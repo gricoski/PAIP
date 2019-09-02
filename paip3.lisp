@@ -1202,5 +1202,15 @@ Pick that function or any of them and see more information on it
   (check-type x number)
   (* x 14))
 
-;;Assert tests an expression and signals an error if false
+;;Assert tests an expression and signals an error if false - No continuation just Error
+(defun t14v2 (x)
+  "Multiply x by 14"
+  (assert (numberp x))
+  (* x 14))
+;;Gives error if not number
 
+;;An Assert with the option to continue...
+(defun t14v3 (x)
+  "mulipty by 14"
+  (assert (numberp x) (x))
+  (* x 14))
