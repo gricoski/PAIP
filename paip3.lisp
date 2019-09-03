@@ -1212,5 +1212,35 @@ Pick that function or any of them and see more information on it
 ;;An Assert with the option to continue...
 (defun t14v3 (x)
   "mulipty by 14"
-  (assert (numberp x) (x))
+  (assert (numberp x) (x));;State the argument that should be allowed to be updated
   (* x 14))
+
+;;An Assert with formatting of the Error Message
+(defun eat-porridge (bear)
+  (assert (< too-cold (temperature (bear-porridge bear)) too-hot)
+          (bear (bear-porridge bear))
+          "~a's porridge is not just right: ~a"
+          bear (hotness (bear-porridge bear)))
+  (eat (bear-porridge bear)))
+
+;;Create a consistency cheacker
+;;-Checks for all errors in a data structure
+;;-When new errors are discovered add it as a check in the consistency cheacker
+;;-Fastest way to help isoloate and find bugs
+
+
+;;Keep a list of difficult test cases on hand.
+;;Allows to see if any changes caused an old bug to pop up
+;;AKA regression testing
+
+;;Example of a tool for maintaining a suite of regression tests
+(defun test-ex ()
+  "Test the program EX on a series of examples."
+  (init-ex) ;Initialize the EX program first.
+  (assert (equal (ex 3 4) 5))
+  (assert (equal (ex 5 0) 0))
+  (assert (equal (ex 'x 0) 0))
+  )
+
+;;Timing Tools
+
