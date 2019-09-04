@@ -1242,5 +1242,16 @@ Pick that function or any of them and see more information on it
   (assert (equal (ex 'x 0) 0))
   )
 
-;;Timing Tools
+;;Timing Tools - How long it takes a program to complete
 
+;;Example
+(defun f (n) (dotimes (i n) nil))
+(time (f 1000000))
+
+;;Compare doing in REPL versus compiling first
+;;Compiled version is 300 times faster and uses less storage
+
+;;Make a flexible program first
+;;Then modify the most used parts to be more efficient
+
+;;Evaluation - 
