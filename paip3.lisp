@@ -1254,4 +1254,17 @@ Pick that function or any of them and see more information on it
 ;;Make a flexible program first
 ;;Then modify the most used parts to be more efficient
 
-;;Evaluation - 
+;;Evaluation - apply functions to arguments
+
+;;funcall - apply a function to individual arguments
+(funcall #'+ 1 2 3 4)
+
+;;apply - mainly used to apply a function to a list of arguments - can also have arguments before list
+(apply #'+ '(1 2 3 4))
+(apply #'+ 1 2'(3 4))
+
+;;Eval - passed a single argument or an atom
+(eval '(+ 1 2 3 4))
+;;People don't use eval anymore. They use lambda instead.
+
+;;Closures
