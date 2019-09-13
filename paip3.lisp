@@ -1267,4 +1267,24 @@ Pick that function or any of them and see more information on it
 (eval '(+ 1 2 3 4))
 ;;People don't use eval anymore. They use lambda instead.
 
-;;Closures
+;;Closures - Nesting parameters for lambda functions for them to perform more functions...
+
+(defun adder (c)
+  "Return a function that adds c to its args"
+  #'(lambda (x) (+ x c)))
+
+(defun bank-account (balance)
+  "Open a bank account starting with the given balance"
+  #'(lambda (action amount)
+      (case action
+        (deposit (setf balance (+ balance amount)))
+        (withdraw (setf balance (- balance amount))))))
+
+(setf my-account (bank-account 500.00))
+(setf your-account (bank-account 250.00))
+
+(funcall my-account 'withdraw 75.00) ;;Returns 425.00
+(funcall your-account 'withdraw 36.00) ;;Returns 214.00
+(funcall my-account 'withdraw '1000000) ;;Returns -999575.0
+(funcall my-account 'deposit '14000000000)
+(funcall my-account 'deposit '1000000000) ;;Returns 14999001000
