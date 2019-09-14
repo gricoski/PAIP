@@ -1288,3 +1288,29 @@ Pick that function or any of them and see more information on it
 (funcall my-account 'withdraw '1000000) ;;Returns -999575.0
 (funcall my-account 'deposit '14000000000)
 (funcall my-account 'deposit '1000000000) ;;Returns 14999001000
+
+;;Lexical Variables - deposit lives on even though it was created in a function and the
+;;function can be closed and deposit can still be refrenced
+
+;;We can call the closure and it can refrence balance because the code that created
+;;the closure appeared lexically wihtin the scope of balance
+
+;;Lisp lexical variables are different becuase they can be captured inside closures and referred to even after the flow of control as left their scope
+
+;;Special Variables - made with defvar or defparaments and can be bound both locally
+;;and globally
+
+;;Example:
+(defun report1 ()
+  (format t "Counter = ~d" *counter*))
+
+(report1) ;;Returns an error for counter to be unbound
+
+(let ((*counter* 100))
+  (report1)) ;;Returns an error for counter to be unbound
+
+(report1) ;;Same Error
+
+;;However it should have been 0 first and Third and then 100 for the second
+;;As the first and third is when it's global and the second is local.  Local ends
+;;once the scope of let is closed. 
