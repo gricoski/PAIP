@@ -1314,3 +1314,17 @@ Pick that function or any of them and see more information on it
 ;;However it should have been 0 first and Third and then 100 for the second
 ;;As the first and third is when it's global and the second is local.  Local ends
 ;;once the scope of let is closed. 
+
+;;Exercise what will Let push out (GLOBAL vs LOCAL)
+(setf a 'Amazon)
+(defvar *b* 'BGS-blog)
+
+(defun fun () *b*)
+
+(let ((a 'EDC)
+      (*b* 'shipGB))
+  (list a *b* (fun) (symbol-value 'a) (symbol-value '*b*)))
+;;(EDC SHIPGB SHIPGB AMAZON SHIPGB)
+
+
+;;Multiple Values
