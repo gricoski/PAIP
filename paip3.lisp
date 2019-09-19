@@ -1328,3 +1328,28 @@ Pick that function or any of them and see more information on it
 
 
 ;;Multiple Values
+;;Most functions return one value
+;;Round returns two values both the whole and the fraction
+
+(round 2.14)
+;;Returns 2
+;;Returns 0.140001
+
+;;Functions still only work on the first part even if it returns two values
+(* 5 (round 2.14))
+;;Returns 10
+
+;;Their Example of creating a special function to return multiple values
+(defun show-both (x)
+  (multiple-value-bind (int rem)
+      (round x)
+    (format t "~f = ~d + ~f" x int rem)))
+;;Reutnrs 2.14 = 2 + 0.140001
+
+;;You can also write functions of your own that return multiple values using values
+(values 1 2 3) ;;returns 1 2 3
+
+;;describe is a function that uses values, but doesn't return any values
+(describe 'pp);; Symbol no Value
+
+;;More about parameters 3.19
