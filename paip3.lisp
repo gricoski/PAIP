@@ -1353,3 +1353,16 @@ Pick that function or any of them and see more information on it
 (describe 'pp);; Symbol no Value
 
 ;;More about parameters 3.19
+;;Example
+
+(defun math-quiz (op range n)
+  "Ask the suer a series of math problems."
+  (dotimes (i n)
+    (problem (random range) op (random range))))
+
+(defun problem (x op y)
+  "Ask a math problem, read a replay and say if it is correct"
+  (format t "~&How much is ~d ~a ~d?" x op y)
+  (if eql (read) (funcall op x y))
+  (princ "Correct!")
+  (princ "Sorry, that's not right!"))
