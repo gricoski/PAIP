@@ -1366,3 +1366,43 @@ Pick that function or any of them and see more information on it
   (if eql (read) (funcall op x y))
   (princ "Correct!")
   (princ "Sorry, that's not right!"))
+
+;;This is a lot of parameters to be required.  Make optional and give defaults
+
+(defun math-quiz (&optional (op '+) (range 100) (n 10))
+  "Ask the user a series of math problems."
+  (dotimes (i n)
+    (problem (random range) op (random range))))
+
+;;This makes it optional, but if any changes want to be made then all 3 need to be typed.
+
+;;Instead make parameters position-independent.
+;;Explicitily name parameters in function call.
+
+(defun math-quiz (&key (op '+) (range 100) (n 10))
+  "Ask the user a series of math porblems."
+  (dotimes (i n)
+    (problem (random range) op (random range))))
+
+(math-quiz :n 5)
+(math-quiz :range 100 :n 5 :op '+)
+;;Both are the same...
+
+;;Keywords can be used anywhere not just in argument lists
+;;&optional - paremeters are optional
+;;&rest - take more 1 or more parameters as input
+;;&key - assign in any order what parameter to change from defualt
+
+;;Lambda List Keywords are the same thing
+
+;;Differences between : and &
+:xyz ;;returns xyz
+&optional ;;returns error
+'&optional ;;returns &OPTIONAL
+
+((defun myLove (&xyz) (+ &xyz &xyz)))
+(myLove '7) ;;Returns 14
+
+((defun noLove (:xyz) (+ :xyz :xyz)))
+;;Error - Keyword appears in variable list
+
