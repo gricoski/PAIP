@@ -1406,3 +1406,14 @@ Pick that function or any of them and see more information on it
 ((defun noLove (:xyz) (+ :xyz :xyz)))
 ;;Error - Keyword appears in variable list
 
+(defun fLove (&key x y) (list x y))
+
+(let ((key s '(:x :y :z)))
+  (g (second keys) 1 (first keys) 2))
+;;Error - Retype???
+
+;;Find using multiple arguments
+
+(find 3 '(1 2 3 4 -5 6.0))
+
+
