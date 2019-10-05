@@ -1414,6 +1414,16 @@ Pick that function or any of them and see more information on it
 
 ;;Find using multiple arguments
 
-(find 3 '(1 2 3 4 -5 6.0))
+(find 3 '(1 2 3 4 -5 6.0)) ;;3
+(find 6 '(1 2 3 4 -5 6.0)) ;;NIL
 
+(find 6 '(1 2 3 4 -5 6.0) :test #'equalp) ;6.0
+;;The added args allowed us to find 6 as a float even though we searched for an Int
+
+(find 4 '(1 2 3 4 -5 6.0) :test #'<) ;6.0
+(find 3 '(1 2 3 4 -5 6.0) :test #'<) ;4
+;;Only returns one find not all that match...
+
+(find 5 '(1 2 3 4 -5 6.0) :key #'abs)
+;;Find even if negative...
 
